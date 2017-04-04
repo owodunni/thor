@@ -11,7 +11,7 @@ mkdir -p $dir
 cd $dir
 #Downloads the choosen amount of ncFiles to the ncFiles folder
 while true; do 
-    read -p "* What data should I get? (hist/all/ext) " RESP
+    read -p "* What data should I get? (hist/all/rain/exit) " RESP
     if [ "$RESP" = "hist" ]; then
         echo "* Begining Downloading $RESP data."
         ../scripts/wget-ncFilesHist.sh
@@ -20,8 +20,12 @@ while true; do
         echo "* Begining Downloading $RESP data."
         ../scripts/wget-ncFilesMax-i.sh
         break
-    elif [ "$RESP" = "ext" ]; then
+    elif [ "$RESP" = "exit" ]; then
         echo "* Exiting."
+        break
+    elif [ "$RESP" = "rain" ]; then
+        echo "* Begining Downloading rain Europe data."	
+        ../scripts/wget-rainEurope-i.sh
         break
     else
         echo "* $RESP is not a valid input pls help me help you."
