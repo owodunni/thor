@@ -113,10 +113,13 @@ def handleRequest(arguments, ncFileDictTree, log):
     timeFlag = False
     for ncFile in requestedFiles:
         # If request within time period for file
+        print(ncFile.getStartDate())
+    
+    
         if arguments["from-date"] >= ncFile.getStartDate()\
            and arguments["from-date"] <= ncFile.getLastDate():
             timeFlag = True
-
+    
             climateAreaDict = ncFile.getData(
                 arguments["from-date"],
                 arguments["from-date"],

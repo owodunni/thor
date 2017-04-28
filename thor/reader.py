@@ -240,9 +240,9 @@ class Reader():
          stopLong] = areaDict["data"]
 
         weatherData3D = self.netCDF.variables[self.variable][
-            startTime:stopTime,
-            startLat:stopLat,
-            startLong:stopLong]
+            :,
+            :,
+            :]
 
         if not weatherData3D.size:
             return {"ok": False,

@@ -14,8 +14,11 @@ cacheMaxAge = 24 * 60 * 60
 
 ncFolder = "ncFiles"
 
-apiMustArgs = ("month",
-               "year",
+apiMustArgs = ("return-format",
+	           "from-month",
+               "from-year",
+               "to-month",
+               "to-year",
                "from-longitude",
                "from-latitude",
                "to-latitude",

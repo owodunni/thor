@@ -65,14 +65,39 @@ def argumentsHandler(arguments):
                 "Missing non-optional argument(s) " + errorMessage + "!"}
 
     # ---------------------------------------
+    # Handeling outputformat
+    try:
+	    arguments["return-format"] = str(arguments["return-format"])
+    except ValueError as e:
+	    return {"ok": False,
+		        "error": "Return-format must be given as a string!"
+		        }	
+    if not (arguments["return-format"].lower() == "png" or 
+	        arguments["return-format"].lower() == "json" or 
+	        arguments["return-format"].lower() == "gzip") :
+	    return{"ok": False,
+               "error": "Can not return that format"
+	           }
 
     # Handeling time
     try:
-        arguments["to-month"] = int(arguments["month"])
-        arguments["year"] = int(arguments["year"])
+        arguments["to-month"] = int(arguments["to-month"])
+        arguments["to-year"] = int(arguments["to-year"])
     except ValueError as e:
         return {"ok": False,
-                "error": "Month and year needs to integers!"
+                "error": "to-month and to-year needs to integers!"
+                }
+    try:
+        arguments["from-month"] = int(arguments["from-month"])
+        arguments["from-year"] = int(arguments["from-year"])
+    except ValueError as e:
+        return {"ok": False,
+                "error": "from-month and from-year needs to integers!"
+               }
+                                                              
+    if arguments["from-month"] < 1 or arguments["from-month"] > 12:
+        return {"ok": False,
+                "error": "Month has to be an integer between 1 and 12!"
                 }
 
     if arguments["to-month"] < 1 or arguments["to-month"] > 12:
@@ -80,12 +105,20 @@ def argumentsHandler(arguments):
                 "error": "Month has to be an integer between 1 and 12!"
                 }
 
-    if arguments["year"] < 1950 or arguments["year"] > 2100:
+    if arguments["from-year"] < 1950 or arguments["from-year"] > 2100:
+        return {"ok": False,
+                "error": "Year has to be between 1950 and 2100!"
+                }
+                        
+    if arguments["to-year"] < 1950 or arguments["to-year"] > 2100:
         return {"ok": False,
                 "error": "Year has to be between 1950 and 2100!"
                 }
 
-    arguments["from-date"] = datetime(arguments["year"],
+    arguments["from-date"] = datetime(arguments["from-year"],
+                                      arguments["from-month"], 1)
+
+    arguments["to-date"] = datetime(arguments["to-year"],
                                       arguments["to-month"], 1)
     # ---------------------------------------
 

@@ -86,8 +86,10 @@ def api(variable):
         str(argCheckDict["height-resolution"]) +\
         str(argCheckDict["climate-model"]) +\
         str(argCheckDict["exhaust-level"]) +\
-        str(argCheckDict["year"]) +\
-        str(argCheckDict["month"]) +\
+        str(argCheckDict["to-year"]) +\
+        str(argCheckDict["to-month"]) +\
+        str(argCheckDict["from-year"]) +\
+        str(argCheckDict["from-month"]) +\
         str(argCheckDict["from-longitude"]) +\
         str(argCheckDict["from-latitude"]) +\
         str(argCheckDict["to-longitude"]) +\
